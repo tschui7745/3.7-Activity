@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tschui-nginx-deployment
+  namespace: tschui-eks-activity
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      serviceAccountName: tschui-nginx-service-account
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
